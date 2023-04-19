@@ -20,6 +20,12 @@ struct PlayerView: View {
                 .frame(width: UIScreen.main.bounds.width)
                 .ignoresSafeArea()
             
+            // Use a 'Rectangle' to apply a blur view effect to the background.
+            Rectangle()
+                .background(.thinMaterial)
+                .opacity(0.25)
+                .ignoresSafeArea()
+            
             // Overlap all of the components of the playback view on top of the background image.
             VStack(spacing: 32) {
                 // MARK: Dismiss Button & Title
@@ -42,9 +48,8 @@ struct PlayerView: View {
                 
                 Spacer()
                 
-                // MARK: Playback Controls
+                // MARK: Playback Timeline
                 VStack(spacing: 5) {
-                    // Utilize a 'Slider' to represent the playback timeline.
                     Slider(value: $value, in: 0...60)
                         .accentColor(.white)
                     
@@ -56,6 +61,42 @@ struct PlayerView: View {
                     }
                     .font(.caption)
                     .foregroundColor(.white)
+                }
+                
+                // MARK: Playback Controls
+                HStack {
+                    // MARK: Repeat Button
+                    PlaybackControlButton(systemName: "repeat") {
+                        
+                    }
+                    
+                    Spacer()
+                
+                    // MARK: Backward Button
+                    PlaybackControlButton(systemName: "gobackward.10") {
+                        
+                    }
+                    
+                    Spacer()
+                    
+                    // MARK: Play/Pause Button
+                    PlaybackControlButton(systemName: "play.circle.fill", fontSize: 44) {
+                        
+                    }
+                    
+                    Spacer()
+                    
+                    // MARK: Forward Button
+                    PlaybackControlButton(systemName: "goforward.10") {
+                        
+                    }
+                    
+                    Spacer()
+                    
+                    // MARK: Stop Button
+                    PlaybackControlButton(systemName: "stop.fill") {
+                        
+                    }
                 }
             }
             .padding(20)
