@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MeditationView: View {
+    @State private var showPlayer = false
+    
     var body: some View {
         VStack(spacing: 0) {
             // MARK: Image
@@ -35,7 +37,7 @@ struct MeditationView: View {
                         .font(.title)
                     
                     Button {
-                        
+                        showPlayer = true
                     } label: {
                         Label("Play", systemImage: "play.fill")
                             .font(.headline)
@@ -58,6 +60,10 @@ struct MeditationView: View {
             .frame(height: UIScreen.main.bounds.height * 2 / 3)
         }
         .ignoresSafeArea()
+        .fullScreenCover(isPresented: $showPlayer) {
+            // Bind the two screens together by showing the ‘PlayerView’ as a 'fullScreenCover' when the play button is tapped (the 'showPlayer' state is set to true).
+            PlayerView()
+        }
     }
 }
 

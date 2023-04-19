@@ -10,6 +10,8 @@ import SwiftUI
 struct PlayerView: View {
     // Store the current playback time as a state variable for the 'Slider'.
     @State private var value: Double = 0.0
+    // SwiftUI stores the dismiss action in '@Environment' (dismiss the cover in the action closure of the dismiss button).
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
@@ -32,7 +34,7 @@ struct PlayerView: View {
                 // To align the dismiss button to the left, embed it in an 'HStack' and use a 'Spacer'.
                 HStack {
                     Button {
-                        
+                        dismiss()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 36))
