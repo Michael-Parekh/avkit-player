@@ -23,6 +23,11 @@ final class AudioManager {
         
         // Since 'AVAudioPlayer' can throw an error, wrap it in a 'do-catch' block.
         do {
+            // To play the audio even when the device is on silent mode, we need to add a few options to the session.
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            // At the same time, attempt to activate the session in case it fails for any reason.
+            try AVAudioSession.sharedInstance().setActive(true)
+            
             player = try AVAudioPlayer(contentsOf: url)
             player?.play()
         } catch {
