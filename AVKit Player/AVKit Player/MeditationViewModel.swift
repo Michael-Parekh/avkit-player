@@ -7,6 +7,17 @@
 
 import Foundation
 
+// A view model is used to hold presentation logic and acts as a messenger between the view <=> model.
+// Conforms to the 'ObservableObject' protocol to turn it into a publisher (any view that subscribes to it will get updated).
+final class MeditationViewModel: ObservableObject {
+    // Ensures that 'Meditation' can only be updated in this class.
+    private(set) var meditation: Meditation
+    
+    init(meditation: Meditation) {
+        self.meditation = meditation
+    }
+}
+
 // A model is used to pass data around the application efficiently (not necessary for this example app where we only have one song in the colleciton).
 struct Meditation {
     let id = UUID()
