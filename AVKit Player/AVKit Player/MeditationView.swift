@@ -29,7 +29,8 @@ struct MeditationView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Music")
-                        Text(meditationVM.meditation.duration.formatted() + "S")
+                        // Try to format the song duration using our custom 'DateComponentsFormatter' extension. 
+                        Text(DateComponentsFormatter.abbreviated.string(from: meditationVM.meditation.duration) ?? meditationVM.meditation.duration.formatted() + "S")
                     }
                     .font(.subheadline)
                     .textCase(.uppercase)
