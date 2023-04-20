@@ -105,6 +105,10 @@ struct PlayerView: View {
             }
             .padding(20)
         }
+        .onAppear {
+            // When the 'PlayerView' appears, start the audio player. 
+            AudioManager.shared.startPlayer(track: meditationVM.meditation.track)
+        }
     }
 }
 
