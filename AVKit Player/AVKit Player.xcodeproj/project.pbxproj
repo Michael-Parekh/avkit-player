@@ -14,6 +14,7 @@
 		7368B8CE29EF048E00BC9CA3 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368B8CD29EF048E00BC9CA3 /* MeditationView.swift */; };
 		7368B8D029EF827A00BC9CA3 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368B8CF29EF827A00BC9CA3 /* PlayerView.swift */; };
 		7368B8D229EFBA4400BC9CA3 /* PlaybackControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368B8D129EFBA4400BC9CA3 /* PlaybackControlButton.swift */; };
+		7368B8D429F0944600BC9CA3 /* MeditationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368B8D329F0944600BC9CA3 /* MeditationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		7368B8CD29EF048E00BC9CA3 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
 		7368B8CF29EF827A00BC9CA3 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		7368B8D129EFBA4400BC9CA3 /* PlaybackControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControlButton.swift; sourceTree = "<group>"; };
+		7368B8D329F0944600BC9CA3 /* MeditationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				7368B8BF29EEF16400BC9CA3 /* ContentView.swift */,
 				7368B8CD29EF048E00BC9CA3 /* MeditationView.swift */,
 				7368B8CF29EF827A00BC9CA3 /* PlayerView.swift */,
+				7368B8D329F0944600BC9CA3 /* MeditationViewModel.swift */,
 				7368B8D129EFBA4400BC9CA3 /* PlaybackControlButton.swift */,
 				7368B8C129EEF16500BC9CA3 /* Assets.xcassets */,
 				7368B8C329EEF16500BC9CA3 /* Preview Content */,
@@ -150,6 +153,7 @@
 				7368B8CE29EF048E00BC9CA3 /* MeditationView.swift in Sources */,
 				7368B8D229EFBA4400BC9CA3 /* PlaybackControlButton.swift in Sources */,
 				7368B8BE29EEF16400BC9CA3 /* AVKit_PlayerApp.swift in Sources */,
+				7368B8D429F0944600BC9CA3 /* MeditationViewModel.swift in Sources */,
 				7368B8D029EF827A00BC9CA3 /* PlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
