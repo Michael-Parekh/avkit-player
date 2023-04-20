@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct MeditationView: View {
+    // This view becomes a subscriber to the 'MeditationViewModel'.
+    @StateObject var meditationVM: MeditationViewModel
     @State private var showPlayer = false
     
     var body: some View {
         VStack(spacing: 0) {
             // MARK: Image
             // The asset image should take up 1/3 of the height of the device's screen.
-            Image("image-feather")
+            Image(meditationVM.meditation.image)
                 .resizable()
                 .scaledToFill()
                 .frame(height: UIScreen.main.bounds.height / 3)
@@ -27,13 +29,13 @@ struct MeditationView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Music")
-                        Text("0s")
+                        Text(meditationVM.meditation.duration.formatted() + "S")
                     }
                     .font(.subheadline)
                     .textCase(.uppercase)
                     .opacity(0.7)
                     
-                    Text("1 Minute Relaxing Meditation")
+                    Text(meditationVM.meditation.title)
                         .font(.title)
                     
                     Button {
@@ -49,7 +51,7 @@ struct MeditationView: View {
                             .cornerRadius(20)
                     }
 
-                    Text("Clear your mind and slumber into nothingness. Allocate only a few moments for a breather.")
+                    Text(meditationVM.meditation.description)
                     
                     // Use a 'Spacer' to push the text to the top of the 'VStack'.
                     Spacer()
@@ -68,7 +70,10 @@ struct MeditationView: View {
 }
 
 struct MeditationView_Previews: PreviewProvider {
+    // Initialize 'MeditationViewModel' with the dummy data and store it in a static variable.
+    static let meditationVM = MeditationViewModel(meditation: Meditation.data)
+    
     static var previews: some View {
-        MeditationView()
+        MeditationView(meditationVM: meditationVM)
     }
 }
