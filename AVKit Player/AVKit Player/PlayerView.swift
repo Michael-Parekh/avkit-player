@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PlayerView: View {
+    // Pass in the instance of 'MeditationViewModel' as a prop from 'MeditationView'.
+    var meditationVM: MeditationViewModel
     // Store the current playback time as a state variable for the 'Slider'.
     @State private var value: Double = 0.0
     // SwiftUI stores the dismiss action in '@Environment' (dismiss the cover in the action closure of the dismiss button).
@@ -16,7 +18,7 @@ struct PlayerView: View {
     var body: some View {
         ZStack {
             // MARK: Background Image
-            Image("image-feather")
+            Image(meditationVM.meditation.image)
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width)
@@ -44,7 +46,7 @@ struct PlayerView: View {
                     Spacer()
                 }
                 
-                Text("1 Minute Relaxing Meditation")
+                Text(meditationVM.meditation.title)
                     .font(.title)
                     .foregroundColor(.white)
                 
@@ -107,7 +109,9 @@ struct PlayerView: View {
 }
 
 struct PlayerView_Previews: PreviewProvider {
+    static let meditationVM = MeditationViewModel(meditation: Meditation.data)
+    
     static var previews: some View {
-        PlayerView()
+        PlayerView(meditationVM: meditationVM)
     }
 }

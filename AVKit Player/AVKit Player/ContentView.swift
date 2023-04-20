@@ -9,13 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        // Initialize an instance of 'MeditationViewModel' with the dummy data and pass it in as a prop to 'MeditationView'.
+        MeditationView(meditationVM: MeditationViewModel(meditation: Meditation.data))
     }
 }
 

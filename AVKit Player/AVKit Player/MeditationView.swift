@@ -65,7 +65,7 @@ struct MeditationView: View {
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $showPlayer) {
             // Bind the two screens together by showing the ‘PlayerView’ as a 'fullScreenCover' when the play button is tapped (the 'showPlayer' state is set to true).
-            PlayerView()
+            PlayerView(meditationVM: meditationVM)
         }
     }
 }
