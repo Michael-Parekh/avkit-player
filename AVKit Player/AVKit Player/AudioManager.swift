@@ -13,7 +13,7 @@ final class AudioManager {
     static let shared = AudioManager()
     var player: AVAudioPlayer?
     
-    func startPlayer(track: String) {
+    func startPlayer(track: String, isPreview: Bool = false) {
         // Get the URL of the track by finding the resource in our project.
         guard let url = Bundle.main.url(forResource: track, withExtension: "mp3") else {
             // If the track cannot be found, print an error and exit the function to prevent the app from crashing. 
@@ -29,7 +29,13 @@ final class AudioManager {
             try AVAudioSession.sharedInstance().setActive(true)
             
             player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
+            
+            if isPreview {
+                // Instead of playing the track right away, we will 'prepareToPlay' if in the Xcode preview (fix the nonstop music in the 'PlayerView' preview).
+                player?.prepareToPlay()
+            } else {
+                player?.play()
+            }
         } catch {
             print("Failed to initialize player", error)
         }
