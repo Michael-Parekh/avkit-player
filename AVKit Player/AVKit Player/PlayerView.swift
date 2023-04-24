@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PlayerView: View {
+    @EnvironmentObject var audioManager: AudioManager
     // Prop for whether we are currently in the Xcode preview mode.
     var isPreview: Bool = false
     // Pass in the instance of 'MeditationViewModel' as a prop from 'MeditationView'.
@@ -109,7 +110,8 @@ struct PlayerView: View {
         }
         .onAppear {
             // When the 'PlayerView' appears, start the audio player.
-            AudioManager.shared.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
+            // AudioManager.shared.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
+            audioManager.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
         }
     }
 }
@@ -118,6 +120,6 @@ struct PlayerView_Previews: PreviewProvider {
     static let meditationVM = MeditationViewModel(meditation: Meditation.data)
     
     static var previews: some View {
-        PlayerView(meditationVM: meditationVM, isPreview: true)
+        PlayerView(isPreview: true, meditationVM: meditationVM)
     }
 }

@@ -8,9 +8,11 @@
 import Foundation
 import AVKit
 
-final class AudioManager {
-    // Turn this class into a singleton that will allow any views/classes/structs to access it (singleton ensures there is only one instance of the class).
-    static let shared = AudioManager()
+// Conforms to the 'ObservableObject' protocol to turn it into a publisher (any view that subscribes to it will get updated).
+final class AudioManager: ObservableObject {
+    // Singleton is an anti-pattern because only parts of the app that need the ‘AudioManager’ should have access to it. Since we still want to keep ‘AudioManager’ as a single instance, we have to initialize it early in the app (in 'AVKit_PlayerApp', for example).
+    // static let shared = AudioManager()
+    
     var player: AVAudioPlayer?
     
     func startPlayer(track: String, isPreview: Bool = false) {
