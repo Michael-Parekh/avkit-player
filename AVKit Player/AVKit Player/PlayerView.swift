@@ -18,6 +18,11 @@ struct PlayerView: View {
     // SwiftUI stores the dismiss action in '@Environment' (dismiss the cover in the action closure of the dismiss button).
     @Environment(\.dismiss) var dismiss
     
+    // For the timeline, we need to observe the change in time and notify the view to update itself using the timer publisher (a publisher that repeatedly emits the current time on the given interval).
+    let timer = Timer
+        .publish(every: 0.5, on: .main, in: .common)
+        .autoconnect()
+    
     var body: some View {
         ZStack {
             // MARK: Background Image
@@ -113,6 +118,12 @@ struct PlayerView: View {
             // AudioManager.shared.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
             audioManager.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
         }
+        .onReceive(timer) { _ in
+            // The view can subscribe to the timer publisher notifications with the ‘onRecieve’ modifier. 
+            guard let player = audioManager.player else { return }
+            // Update the value of the 'Slider' with the player's current time.
+            value = player.currentTime
+        }
     }
 }
 
@@ -120,7 +131,7 @@ struct PlayerView_Previews: PreviewProvider {
     static let meditationVM = MeditationViewModel(meditation: Meditation.data)
     
     static var previews: some View {
-        // Note that the preview became dependent on the environment object and that the preview is a separate entity from the app. For those reasons, we need to pass the environment object modifier to the preview as well (and all of the previews in the parent views). 
+        // Note that the preview became dependent on the environment object and that the preview is a separate entity from the app. For those reasons, we need to pass the environment object modifier to the preview as well (and all of the previews in the parent views).
         PlayerView(isPreview: true, meditationVM: meditationVM)
             .environmentObject(AudioManager())
     }
