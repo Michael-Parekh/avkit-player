@@ -120,6 +120,8 @@ struct PlayerView_Previews: PreviewProvider {
     static let meditationVM = MeditationViewModel(meditation: Meditation.data)
     
     static var previews: some View {
+        // Note that the preview became dependent on the environment object and that the preview is a separate entity from the app. For those reasons, we need to pass the environment object modifier to the preview as well (and all of the previews in the parent views). 
         PlayerView(isPreview: true, meditationVM: meditationVM)
+            .environmentObject(AudioManager())
     }
 }
