@@ -13,7 +13,7 @@ final class AudioManager: ObservableObject {
     // Singleton is an anti-pattern because only parts of the app that need the ‘AudioManager’ should have access to it. Since we still want to keep ‘AudioManager’ as a single instance, we have to initialize it early in the app (in 'AVKit_PlayerApp', for example).
     // static let shared = AudioManager()
     
-    var player: AVAudioPlayer?
+    @Published var player: AVAudioPlayer?
     
     func startPlayer(track: String, isPreview: Bool = false) {
         // Get the URL of the track by finding the resource in our project.
