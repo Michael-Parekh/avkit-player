@@ -60,54 +60,57 @@ struct PlayerView: View {
                 
                 Spacer()
                 
-                // MARK: Playback Timeline
-                VStack(spacing: 5) {
-                    Slider(value: $value, in: 0...60)
-                        .accentColor(.white)
+                // Wrap the entire playback section in a conditional statement based on whether or not there is an instance of player, so that we do not have to provide default values for everything (optional binding).
+                if let player = audioManager.player {
+                    // MARK: Playback Timeline
+                    VStack(spacing: 5) {
+                        Slider(value: $value, in: 0...player.duration)
+                            .accentColor(.white)
+                        
+                        HStack {
+                            Text("0:00")
+                            // Use a spacer to push the two times apart.
+                            Spacer()
+                            Text("1:00")
+                        }
+                        .font(.caption)
+                        .foregroundColor(.white)
+                    }
                     
+                    // MARK: Playback Controls
                     HStack {
-                        Text("0:00")
-                        // Use a spacer to push the two times apart.
+                        // MARK: Repeat Button
+                        PlaybackControlButton(systemName: "repeat") {
+                            
+                        }
+                        
                         Spacer()
-                        Text("1:00")
-                    }
-                    .font(.caption)
-                    .foregroundColor(.white)
-                }
-                
-                // MARK: Playback Controls
-                HStack {
-                    // MARK: Repeat Button
-                    PlaybackControlButton(systemName: "repeat") {
                         
-                    }
-                    
-                    Spacer()
-                
-                    // MARK: Backward Button
-                    PlaybackControlButton(systemName: "gobackward.10") {
+                        // MARK: Backward Button
+                        PlaybackControlButton(systemName: "gobackward.10") {
+                            
+                        }
                         
-                    }
-                    
-                    Spacer()
-                    
-                    // MARK: Play/Pause Button
-                    PlaybackControlButton(systemName: "play.circle.fill", fontSize: 44) {
+                        Spacer()
                         
-                    }
-                    
-                    Spacer()
-                    
-                    // MARK: Forward Button
-                    PlaybackControlButton(systemName: "goforward.10") {
+                        // MARK: Play/Pause Button
+                        PlaybackControlButton(systemName: "play.circle.fill", fontSize: 44) {
+                            
+                        }
                         
-                    }
-                    
-                    Spacer()
-                    
-                    // MARK: Stop Button
-                    PlaybackControlButton(systemName: "stop.fill") {
+                        Spacer()
                         
+                        // MARK: Forward Button
+                        PlaybackControlButton(systemName: "goforward.10") {
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        // MARK: Stop Button
+                        PlaybackControlButton(systemName: "stop.fill") {
+                            
+                        }
                     }
                 }
             }
@@ -119,7 +122,7 @@ struct PlayerView: View {
             audioManager.startPlayer(track: meditationVM.meditation.track, isPreview: isPreview)
         }
         .onReceive(timer) { _ in
-            // The view can subscribe to the timer publisher notifications with the ‘onRecieve’ modifier. 
+            // The view can subscribe to the timer publisher notifications with the ‘onRecieve’ modifier.
             guard let player = audioManager.player else { return }
             // Update the value of the 'Slider' with the player's current time.
             value = player.currentTime
