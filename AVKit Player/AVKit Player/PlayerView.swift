@@ -15,6 +15,8 @@ struct PlayerView: View {
     var meditationVM: MeditationViewModel
     // Store the current playback time as a state variable for the 'Slider'.
     @State private var value: Double = 0.0
+    // Track state variable so that the playback 'value' is not updated when currently dragging the 'Slider'.
+    @State private var isEditing: Bool = false
     // SwiftUI stores the dismiss action in '@Environment' (dismiss the cover in the action closure of the dismiss button).
     @Environment(\.dismiss) var dismiss
     
@@ -65,6 +67,7 @@ struct PlayerView: View {
                     // MARK: Playback Timeline
                     VStack(spacing: 5) {
                         Slider(value: $value, in: 0...player.duration) { editing in
+                            isEditing = editing
                             // We only need to update the current playback time when the drag action is over.
                             if !editing {
                                 player.currentTime = value
@@ -128,7 +131,7 @@ struct PlayerView: View {
         }
         .onReceive(timer) { _ in
             // The view can subscribe to the timer publisher notifications with the ‘onRecieve’ modifier.
-            guard let player = audioManager.player else { return }
+            guard let player = audioManager.player, !isEditing else { return }
             // Update the value of the 'Slider' with the player's current time.
             value = player.currentTime
         }
