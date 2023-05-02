@@ -64,8 +64,13 @@ struct PlayerView: View {
                 if let player = audioManager.player {
                     // MARK: Playback Timeline
                     VStack(spacing: 5) {
-                        Slider(value: $value, in: 0...player.duration)
-                            .accentColor(.white)
+                        Slider(value: $value, in: 0...player.duration) { editing in
+                            // We only need to update the current playback time when the drag action is over.
+                            if !editing {
+                                player.currentTime = value
+                            }
+                        }
+                        .accentColor(.white)
                         
                         HStack {
                             Text("0:00")
