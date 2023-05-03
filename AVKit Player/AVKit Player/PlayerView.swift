@@ -76,10 +76,11 @@ struct PlayerView: View {
                         .accentColor(.white)
                         
                         HStack {
-                            Text("0:00")
+                            Text(DateComponentsFormatter.positional.string(from: player.currentTime) ?? "0:00")
                             // Use a spacer to push the two times apart.
                             Spacer()
-                            Text("1:00")
+                            // Display the remaining time (song duration - current time) using our custom extension on 'DateComponentsFormatter'.
+                            Text(DateComponentsFormatter.positional.string(from: player.duration - player.currentTime) ?? "0:00")
                         }
                         .font(.caption)
                         .foregroundColor(.white)
