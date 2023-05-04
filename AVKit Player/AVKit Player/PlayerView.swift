@@ -103,8 +103,9 @@ struct PlayerView: View {
                         Spacer()
                         
                         // MARK: Play/Pause Button
-                        PlaybackControlButton(systemName: "play.circle.fill", fontSize: 44) {
-                            
+                        // Show the correct button icon based on the playing state of the player. 
+                        PlaybackControlButton(systemName: player.isPlaying ? "pause.circle.fill" : "play.circle.fill", fontSize: 44) {
+                            audioManager.playPause()
                         }
                         
                         Spacer()
