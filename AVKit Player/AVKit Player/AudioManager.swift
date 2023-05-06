@@ -14,6 +14,12 @@ final class AudioManager: ObservableObject {
     // static let shared = AudioManager()
     
     @Published var player: AVAudioPlayer?
+    @Published private(set) var isPlaying: Bool = false {
+        didSet {
+            // Use the 'didSet' observer to print when it has a new value (state is updated accordingly whenever we click play/pause).
+            print("isPlaying", isPlaying)
+        }
+    }
     
     func startPlayer(track: String, isPreview: Bool = false) {
         // Get the URL of the track by finding the resource in our project.
@@ -37,6 +43,7 @@ final class AudioManager: ObservableObject {
                 player?.prepareToPlay()
             } else {
                 player?.play()
+                isPlaying = true
             }
         } catch {
             print("Failed to initialize player", error)
@@ -52,8 +59,10 @@ final class AudioManager: ObservableObject {
         // If the player is playing currently, let it pause. But if the player is paused currently, then let it play.
         if player.isPlaying {
             player.pause()
+            isPlaying = false
         } else {
             player.play()
+            isPlaying = true
         }
     }
 }
