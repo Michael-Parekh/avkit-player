@@ -46,6 +46,7 @@ struct PlayerView: View {
                 // To align the dismiss button to the left, embed it in an 'HStack' and use a 'Spacer'.
                 HStack {
                     Button {
+                        audioManager.stop()
                         dismiss()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
@@ -119,7 +120,8 @@ struct PlayerView: View {
                         
                         // MARK: Stop Button
                         PlaybackControlButton(systemName: "stop.fill") {
-                            
+                            audioManager.stop()
+                            dismiss()
                         }
                     }
                 }
