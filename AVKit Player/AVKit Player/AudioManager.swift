@@ -20,6 +20,8 @@ final class AudioManager: ObservableObject {
             print("isPlaying", isPlaying)
         }
     }
+    // When the repeat button is tapped in 'PlayerView', the track should persistently repeat in a loop using this state.
+    @Published private(set) var isLooping: Bool = false
     
     func startPlayer(track: String, isPreview: Bool = false) {
         // Get the URL of the track by finding the resource in our project.
@@ -73,5 +75,15 @@ final class AudioManager: ObservableObject {
             player.stop()
             isPlaying = false
         }
+    }
+    
+    func toggleLoop() {
+        guard let player = player else { return }
+        
+        // Setting the 'numberOfLoops' to -1 makes it loop forever.
+        player.numberOfLoops = player.numberOfLoops == 0 ? -1 : 0
+        // As a result, the 'isLooping' state becomes true if it is not 0.
+        isLooping = player.numberOfLoops != 0
+        print("isLooping", isLooping)
     }
 }
